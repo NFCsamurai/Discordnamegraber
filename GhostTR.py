@@ -121,10 +121,8 @@ def TrackLu():
 
 
 options = [
-    {'num': 1, 'text': 'IP Tracker', 'func': IP_Track},
-    {'num': 2, 'text': 'Show Your IP', 'func': showIP},
-    {'num': 3, 'text': 'Phone Number Tracker', 'func': phoneGW},
-    {'num': 4, 'text': 'Username Tracker', 'func': TrackLu},
+    {'num': 1, 'text': 'Phone Number Tracker', 'func': phoneGW},
+    {'num': 2, 'text': 'Username Tracker', 'func': TrackLu},
     {'num': 0, 'text': 'Exit', 'func': exit}
 ]
 
