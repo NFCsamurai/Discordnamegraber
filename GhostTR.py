@@ -258,7 +258,7 @@ def run_banner():
            :              `.
             `.              `.     .
               `'`'`'`---..,___`;.-'
-        """)
+        """)   # <--- This closes the f-string correctly
     time.sleep(0.5)
 
 def main():
