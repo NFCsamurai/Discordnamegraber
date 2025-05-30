@@ -24,54 +24,6 @@ def is_option(func):
         return func(*args, **kwargs)
     return wrapper
 
-@is_option
-def IP_Track():
-    ip = input(f"{Wh}\n Enter IP target : {Gr}")
-    print()
-    print(f' {Wh}============= {Gr}SHOW INFORMATION IP ADDRESS {Wh}=============')
-    try:
-        req_api = requests.get(f"http://ipwho.is/{ip}", timeout=10)
-        req_api.raise_for_status()
-        ip_data = req_api.json()
-        if not ip_data.get("success", True):
-            print(f"{Re}API Error: {ip_data.get('message', 'Unknown error')}")
-            return
-        print(f"{Wh}\n IP target       :{Gr}", ip)
-        print(f"{Wh} Type IP         :{Gr}", ip_data.get("type", "N/A"))
-        print(f"{Wh} Country         :{Gr}", ip_data.get("country", "N/A"))
-        print(f"{Wh} Country Code    :{Gr}", ip_data.get("country_code", "N/A"))
-        print(f"{Wh} City            :{Gr}", ip_data.get("city", "N/A"))
-        print(f"{Wh} Continent       :{Gr}", ip_data.get("continent", "N/A"))
-        print(f"{Wh} Continent Code  :{Gr}", ip_data.get("continent_code", "N/A"))
-        print(f"{Wh} Region          :{Gr}", ip_data.get("region", "N/A"))
-        print(f"{Wh} Region Code     :{Gr}", ip_data.get("region_code", "N/A"))
-        print(f"{Wh} Latitude        :{Gr}", ip_data.get("latitude", "N/A"))
-        print(f"{Wh} Longitude       :{Gr}", ip_data.get("longitude", "N/A"))
-        lat = ip_data.get('latitude')
-        lon = ip_data.get('longitude')
-        if lat is not None and lon is not None:
-            print(f"{Wh} Maps            :{Gr}", f"https://www.google.com/maps/@{lat},{lon},8z")
-        print(f"{Wh} EU              :{Gr}", ip_data.get("is_eu", "N/A"))
-        print(f"{Wh} Postal          :{Gr}", ip_data.get("postal", "N/A"))
-        print(f"{Wh} Calling Code    :{Gr}", ip_data.get("calling_code", "N/A"))
-        print(f"{Wh} Capital         :{Gr}", ip_data.get("capital", "N/A"))
-        print(f"{Wh} Borders         :{Gr}", ip_data.get("borders", "N/A"))
-        flag = ip_data.get("flag")
-        print(f"{Wh} Country Flag    :{Gr}", flag.get("emoji") if flag else "N/A")
-        connection = ip_data.get("connection", {})
-        print(f"{Wh} ASN             :{Gr}", connection.get("asn", "N/A"))
-        print(f"{Wh} ORG             :{Gr}", connection.get("org", "N/A"))
-        print(f"{Wh} ISP             :{Gr}", connection.get("isp", "N/A"))
-        print(f"{Wh} Domain          :{Gr}", connection.get("domain", "N/A"))
-        tz = ip_data.get("timezone", {})
-        print(f"{Wh} ID              :{Gr}", tz.get("id", "N/A"))
-        print(f"{Wh} ABBR            :{Gr}", tz.get("abbr", "N/A"))
-        print(f"{Wh} DST             :{Gr}", tz.get("is_dst", "N/A"))
-        print(f"{Wh} Offset          :{Gr}", tz.get("offset", "N/A"))
-        print(f"{Wh} UTC             :{Gr}", tz.get("utc", "N/A"))
-        print(f"{Wh} Current Time    :{Gr}", tz.get("current_time", "N/A"))
-    except Exception as e:
-        print(f"{Re}Failed to fetch IP info: {e}")
 
 @is_option
 def phoneGW():
@@ -167,16 +119,6 @@ def TrackLu():
     for site, url in results.items():
         print(f" {Wh}[ {Gr}+ {Wh}] {site} : {Gr}{url}")
 
-@is_option
-def showIP():
-    try:
-        respone = requests.get('https://api.ipify.org/', timeout=10)
-        Show_IP = respone.text
-        print(f"\n {Wh}========== {Gr}SHOW INFORMATION YOUR IP {Wh}==========")
-        print(f"\n {Wh}[{Gr} + {Wh}] Your IP Address : {Gr}{Show_IP}")
-        print(f"\n {Wh}==============================================")
-    except Exception as e:
-        print(f"{Re}Failed to get your IP: {e}")
 
 options = [
     {'num': 1, 'text': 'IP Tracker', 'func': IP_Track},
@@ -237,7 +179,7 @@ def option():
 / /_/ / / / / /_/ (__  ) /_/_____/ / / /  / /_/ / /__/ ,<   
 \____/_/ /_/\____/____/\__/     /_/ /_/   \__,_/\___/_/|_| 
 
-          {Wh}[ + ]  C O D E   B Y  H U N X  [ + ]
+          {Wh}
     """)
     stderr.writelines(f"\n\n\n{option_text()}")
 
@@ -248,8 +190,8 @@ def run_banner():
          .-.
        .'   `.          {Wh}--------------------------------
        :g g   :         {Wh}| {Gr}GHOST - TRACKER - IP ADDRESS {Wh}|
-       : o    `.        {Wh}|       {Gr}@CODE BY HUNXBYTS      {Wh}|
-      :         ``.     {Wh}--------------------------------
+       : o    `.        {Wh}--------------------------------
+      :         ``.
      :             `.
     :  :         .   `.
     :   :          ` . `.
