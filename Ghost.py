@@ -1,5 +1,4 @@
 #!/usr/bin/python
-# CODE BY HUNX04
 
 import json
 import requests
